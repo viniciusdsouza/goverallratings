@@ -17,10 +17,37 @@ definitions:
       message:
         type: string
     type: object
+  handler.CreateShowRequest:
+    properties:
+      episodes:
+        type: integer
+      genre:
+        type: string
+      rating:
+        type: integer
+      seasons:
+        type: integer
+      title:
+        type: string
+    type: object
+  handler.CreateShowResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.ShowResponse'
+      message:
+        type: string
+    type: object
   handler.DeleteMovieResponse:
     properties:
       data:
         $ref: '#/definitions/schemas.MovieResponse'
+      message:
+        type: string
+    type: object
+  handler.DeleteShowResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.ShowResponse'
       message:
         type: string
     type: object
@@ -38,11 +65,27 @@ definitions:
       message:
         type: string
     type: object
+  handler.GetShowResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.ShowResponse'
+      message:
+        type: string
+    type: object
   handler.ListMovieResponse:
     properties:
       data:
         items:
           $ref: '#/definitions/schemas.MovieResponse'
+        type: array
+      message:
+        type: string
+    type: object
+  handler.ListShowResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schemas.ShowResponse'
         type: array
       message:
         type: string
@@ -65,6 +108,26 @@ definitions:
       message:
         type: string
     type: object
+  handler.UpdateShowRequest:
+    properties:
+      episodes:
+        type: integer
+      genre:
+        type: string
+      rating:
+        type: integer
+      seasons:
+        type: integer
+      title:
+        type: string
+    type: object
+  handler.UpdateShowResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.ShowResponse'
+      message:
+        type: string
+    type: object
   schemas.MovieResponse:
     properties:
       createdAt:
@@ -78,6 +141,27 @@ definitions:
       id:
         type: integer
       rating:
+        type: integer
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  schemas.ShowResponse:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      episodes:
+        type: integer
+      genre:
+        type: string
+      id:
+        type: integer
+      rating:
+        type: integer
+      seasons:
         type: integer
       title:
         type: string
@@ -208,4 +292,125 @@ paths:
       summary: Update movie
       tags:
       - Movies
+  /shows:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListShowResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: List shows
+      tags:
+      - Shows
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateShowRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateShowResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create show
+      tags:
+      - Shows
+  /shows/:id:
+    delete:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteShowResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Delete show
+      tags:
+      - Shows
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetShowResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Get show
+      tags:
+      - Shows
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateShowRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UpdateShowResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Update show
+      tags:
+      - Shows
 swagger: "2.0"
