@@ -5,6 +5,7 @@ import (
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/viniciusdsouza/goverallratings/docs"
+	booksHandler "github.com/viniciusdsouza/goverallratings/handler/books"
 	moviesHandler "github.com/viniciusdsouza/goverallratings/handler/movies"
 	showsHandler "github.com/viniciusdsouza/goverallratings/handler/shows"
 )
@@ -13,6 +14,7 @@ func initializeRoutes(router *gin.Engine) {
 	// Initialize Handler
 	moviesHandler.InitializeHandler()
 	showsHandler.InitializeHandler()
+	booksHandler.InitializeHandler()
 	basePath := "/api/v1/"
 	docs.SwaggerInfo.BasePath = basePath
 
@@ -32,6 +34,15 @@ func initializeRoutes(router *gin.Engine) {
 		show.PUT("/:id", showsHandler.UpdateShowHandler)
 		show.DELETE("/:id", showsHandler.DeleteShowHandler)
 		show.GET("", showsHandler.ListShowsHandler)
+	}
+
+	book := router.Group(basePath + "/books")
+	{
+		book.GET("/:id", booksHandler.GetBookHandler)
+		book.POST("", booksHandler.CreateBookHandler)
+		book.PUT("/:id", booksHandler.UpdateBookHandler)
+		book.DELETE("/:id", booksHandler.DeleteBookHandler)
+		book.GET("", booksHandler.ListBooksHandler)
 	}
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
