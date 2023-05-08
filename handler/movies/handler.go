@@ -11,6 +11,6 @@ var (
 )
 
 func InitializeHandler() {
-	logger = config.GetLogger("handler")
+	logger = config.GetLogger("movies handler")
 	db = config.GetSQLite()
 }
