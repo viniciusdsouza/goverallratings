@@ -204,7 +204,7 @@ definitions:
   schemas.BookResponse:
     properties:
       authorName:
-        type: integer
+        type: string
       createdAt:
         type: string
       deletedAt:

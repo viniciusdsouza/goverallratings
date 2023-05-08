@@ -895,7 +895,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "authorName": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "createdAt": {
                     "type": "string"

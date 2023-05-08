@@ -20,7 +20,7 @@ type BookResponse struct {
 	UpdatedAt  time.Time  `json:"updatedAt"`
 	DeletedAt  *time.Time `json:"deletedAt,omitempty"`
 	Title      string     `json:"title"`
-	AuthorName int64      `json:"authorName"`
+	AuthorName string      `json:"authorName"`
 	Rating     int64      `json:"rating"`
 	Genre      string     `json:"genre"`
 }
