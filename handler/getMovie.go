@@ -8,6 +8,15 @@ import (
 	"github.com/viniciusdsouza/goverallratings/schemas"
 )
 
+// @BasePath /api/v1
+// @Summary Get movie
+// @Tags Movies
+// @Accept json
+// @Produce json
+// @Success 200 {object} GetMovieResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /movies/:id [get]
 func GetMovieHandler(ctx *gin.Context) {
 	id := ctx.Param("id")
 	if id == "" {

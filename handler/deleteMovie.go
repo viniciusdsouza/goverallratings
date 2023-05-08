@@ -8,6 +8,15 @@ import (
 	"github.com/viniciusdsouza/goverallratings/schemas"
 )
 
+// @BasePath /api/v1
+// @Summary Delete movie
+// @Tags Movies
+// @Accept json
+// @Produce json
+// @Success 200 {object} DeleteMovieResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /movies/:id [delete]
 func DeleteMovieHandler(ctx *gin.Context) {
 	id := ctx.Param("id")
 	if id == "" {

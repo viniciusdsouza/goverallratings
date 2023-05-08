@@ -2,8 +2,12 @@
 
 APP_NAME=goverallratings
 
-default: run
+default: run-with-docs
 
+run-with-docs:
+	@echo "STARTING APPLICATION WITH DOCS..."
+	@swag init
+	@go run main.go
 run:
 	@echo "STARTING APPLICATION..."
 	@go run main.go

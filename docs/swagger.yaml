@@ -1,4 +1,211 @@
+definitions:
+  handler.CreateMovieRequest:
+    properties:
+      duration:
+        type: integer
+      genre:
+        type: string
+      rating:
+        type: integer
+      title:
+        type: string
+    type: object
+  handler.CreateMovieResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.MovieResponse'
+      message:
+        type: string
+    type: object
+  handler.DeleteMovieResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.MovieResponse'
+      message:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      errorCode:
+        type: string
+      message:
+        type: string
+    type: object
+  handler.GetMovieResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.MovieResponse'
+      message:
+        type: string
+    type: object
+  handler.ListMovieResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schemas.MovieResponse'
+        type: array
+      message:
+        type: string
+    type: object
+  handler.UpdateMovieRequest:
+    properties:
+      duration:
+        type: integer
+      genre:
+        type: string
+      rating:
+        type: integer
+      title:
+        type: string
+    type: object
+  handler.UpdateMovieResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.MovieResponse'
+      message:
+        type: string
+    type: object
+  schemas.MovieResponse:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      duration:
+        type: integer
+      genre:
+        type: string
+      id:
+        type: integer
+      rating:
+        type: integer
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /movies:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListMovieResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: List movies
+      tags:
+      - Movies
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateMovieRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateMovieResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create movie
+      tags:
+      - Movies
+  /movies/:id:
+    delete:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteMovieResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Delete movie
+      tags:
+      - Movies
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetMovieResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Get movie
+      tags:
+      - Movies
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateMovieRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UpdateMovieResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Update movie
+      tags:
+      - Movies
 swagger: "2.0"

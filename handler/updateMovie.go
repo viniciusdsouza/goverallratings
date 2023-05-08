@@ -8,6 +8,16 @@ import (
 	"github.com/viniciusdsouza/goverallratings/schemas"
 )
 
+// @BasePath /api/v1
+// @Summary Update movie
+// @Tags Movies
+// @Accept json
+// @Produce json
+// @Param request body UpdateMovieRequest true "Request Body"
+// @Success 200 {object} UpdateMovieResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /movies/:id [put]
 func UpdateMovieHandler(ctx *gin.Context) {
 	cmd := UpdateMovieRequest{}
 	

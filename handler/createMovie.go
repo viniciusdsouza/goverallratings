@@ -6,7 +6,16 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/viniciusdsouza/goverallratings/schemas"
 )
-
+// @BasePath /api/v1
+// @Summary Create movie
+// @Tags Movies
+// @Accept json
+// @Produce json
+// @Param request body CreateMovieRequest true "Request Body"
+// @Success 200 {object} CreateMovieResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /movies [post]
 func CreateMovieHandler(ctx *gin.Context) {
 	cmd := CreateMovieRequest{}
 	
