@@ -16,6 +16,192 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/books": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Books"
+                ],
+                "summary": "List books",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ListBookResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Create book",
+                "parameters": [
+                    {
+                        "description": "Request Body",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.CreateBookRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.CreateBookResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/books/:id": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get book",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.GetBookResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Update book",
+                "parameters": [
+                    {
+                        "description": "Request Body",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handler.UpdateBookRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.UpdateBookResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete book",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.DeleteBookResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/movies": {
             "get": {
                 "consumes": [
@@ -38,13 +224,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     }
                 }
@@ -81,13 +267,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     }
                 }
@@ -115,13 +301,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     }
                 }
@@ -158,13 +344,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     }
                 }
@@ -190,13 +376,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse"
                         }
                     }
                 }
@@ -218,19 +404,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.ListShowResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ListShowResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     }
                 }
@@ -261,19 +447,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.CreateShowResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.CreateShowResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     }
                 }
@@ -295,19 +481,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.GetShowResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.GetShowResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     }
                 }
@@ -338,19 +524,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.UpdateShowResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.UpdateShowResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     }
                 }
@@ -370,19 +556,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.DeleteShowResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.DeleteShowResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/handler.ErrorResponse"
+                            "$ref": "#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse"
                         }
                     }
                 }
@@ -390,6 +576,125 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_viniciusdsouza_goverallratings_handler_shows.CreateShowResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schemas.ShowResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_viniciusdsouza_goverallratings_handler_shows.DeleteShowResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schemas.ShowResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_viniciusdsouza_goverallratings_handler_shows.GetShowResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schemas.ShowResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_viniciusdsouza_goverallratings_handler_shows.ListShowResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/schemas.ShowResponse"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_viniciusdsouza_goverallratings_handler_shows.UpdateShowResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schemas.ShowResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.CreateBookRequest": {
+            "type": "object",
+            "properties": {
+                "authorName": {
+                    "type": "string"
+                },
+                "genre": {
+                    "type": "string"
+                },
+                "rating": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.CreateBookResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schemas.BookResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
         "handler.CreateMovieRequest": {
             "type": "object",
             "properties": {
@@ -438,11 +743,11 @@ const docTemplate = `{
                 }
             }
         },
-        "handler.CreateShowResponse": {
+        "handler.DeleteBookResponse": {
             "type": "object",
             "properties": {
                 "data": {
-                    "$ref": "#/definitions/schemas.ShowResponse"
+                    "$ref": "#/definitions/schemas.BookResponse"
                 },
                 "message": {
                     "type": "string"
@@ -460,22 +765,11 @@ const docTemplate = `{
                 }
             }
         },
-        "handler.DeleteShowResponse": {
+        "handler.GetBookResponse": {
             "type": "object",
             "properties": {
                 "data": {
-                    "$ref": "#/definitions/schemas.ShowResponse"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        },
-        "handler.ErrorResponse": {
-            "type": "object",
-            "properties": {
-                "errorCode": {
-                    "type": "string"
+                    "$ref": "#/definitions/schemas.BookResponse"
                 },
                 "message": {
                     "type": "string"
@@ -493,11 +787,14 @@ const docTemplate = `{
                 }
             }
         },
-        "handler.GetShowResponse": {
+        "handler.ListBookResponse": {
             "type": "object",
             "properties": {
                 "data": {
-                    "$ref": "#/definitions/schemas.ShowResponse"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/schemas.BookResponse"
+                    }
                 },
                 "message": {
                     "type": "string"
@@ -518,14 +815,28 @@ const docTemplate = `{
                 }
             }
         },
-        "handler.ListShowResponse": {
+        "handler.UpdateBookRequest": {
+            "type": "object",
+            "properties": {
+                "authorName": {
+                    "type": "string"
+                },
+                "genre": {
+                    "type": "string"
+                },
+                "rating": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.UpdateBookResponse": {
             "type": "object",
             "properties": {
                 "data": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/schemas.ShowResponse"
-                    }
+                    "$ref": "#/definitions/schemas.BookResponse"
                 },
                 "message": {
                     "type": "string"
@@ -580,13 +891,31 @@ const docTemplate = `{
                 }
             }
         },
-        "handler.UpdateShowResponse": {
+        "schemas.BookResponse": {
             "type": "object",
             "properties": {
-                "data": {
-                    "$ref": "#/definitions/schemas.ShowResponse"
+                "authorName": {
+                    "type": "integer"
                 },
-                "message": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "type": "string"
+                },
+                "genre": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "rating": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updatedAt": {
                     "type": "string"
                 }
             }

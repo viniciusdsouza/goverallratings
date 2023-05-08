@@ -1,4 +1,80 @@
 definitions:
+  github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse:
+    properties:
+      errorCode:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse:
+    properties:
+      errorCode:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_viniciusdsouza_goverallratings_handler_shows.CreateShowResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.ShowResponse'
+      message:
+        type: string
+    type: object
+  github_com_viniciusdsouza_goverallratings_handler_shows.DeleteShowResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.ShowResponse'
+      message:
+        type: string
+    type: object
+  github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse:
+    properties:
+      errorCode:
+        type: string
+      message:
+        type: string
+    type: object
+  github_com_viniciusdsouza_goverallratings_handler_shows.GetShowResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.ShowResponse'
+      message:
+        type: string
+    type: object
+  github_com_viniciusdsouza_goverallratings_handler_shows.ListShowResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schemas.ShowResponse'
+        type: array
+      message:
+        type: string
+    type: object
+  github_com_viniciusdsouza_goverallratings_handler_shows.UpdateShowResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.ShowResponse'
+      message:
+        type: string
+    type: object
+  handler.CreateBookRequest:
+    properties:
+      authorName:
+        type: string
+      genre:
+        type: string
+      rating:
+        type: integer
+      title:
+        type: string
+    type: object
+  handler.CreateBookResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.BookResponse'
+      message:
+        type: string
+    type: object
   handler.CreateMovieRequest:
     properties:
       duration:
@@ -30,10 +106,10 @@ definitions:
       title:
         type: string
     type: object
-  handler.CreateShowResponse:
+  handler.DeleteBookResponse:
     properties:
       data:
-        $ref: '#/definitions/schemas.ShowResponse'
+        $ref: '#/definitions/schemas.BookResponse'
       message:
         type: string
     type: object
@@ -44,17 +120,10 @@ definitions:
       message:
         type: string
     type: object
-  handler.DeleteShowResponse:
+  handler.GetBookResponse:
     properties:
       data:
-        $ref: '#/definitions/schemas.ShowResponse'
-      message:
-        type: string
-    type: object
-  handler.ErrorResponse:
-    properties:
-      errorCode:
-        type: string
+        $ref: '#/definitions/schemas.BookResponse'
       message:
         type: string
     type: object
@@ -65,10 +134,12 @@ definitions:
       message:
         type: string
     type: object
-  handler.GetShowResponse:
+  handler.ListBookResponse:
     properties:
       data:
-        $ref: '#/definitions/schemas.ShowResponse'
+        items:
+          $ref: '#/definitions/schemas.BookResponse'
+        type: array
       message:
         type: string
     type: object
@@ -81,12 +152,21 @@ definitions:
       message:
         type: string
     type: object
-  handler.ListShowResponse:
+  handler.UpdateBookRequest:
+    properties:
+      authorName:
+        type: string
+      genre:
+        type: string
+      rating:
+        type: integer
+      title:
+        type: string
+    type: object
+  handler.UpdateBookResponse:
     properties:
       data:
-        items:
-          $ref: '#/definitions/schemas.ShowResponse'
-        type: array
+        $ref: '#/definitions/schemas.BookResponse'
       message:
         type: string
     type: object
@@ -121,11 +201,23 @@ definitions:
       title:
         type: string
     type: object
-  handler.UpdateShowResponse:
+  schemas.BookResponse:
     properties:
-      data:
-        $ref: '#/definitions/schemas.ShowResponse'
-      message:
+      authorName:
+        type: integer
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      genre:
+        type: string
+      id:
+        type: integer
+      rating:
+        type: integer
+      title:
+        type: string
+      updatedAt:
         type: string
     type: object
   schemas.MovieResponse:
@@ -171,6 +263,127 @@ definitions:
 info:
   contact: {}
 paths:
+  /books:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListBookResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+      summary: List books
+      tags:
+      - Books
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateBookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateBookResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+      summary: Create book
+      tags:
+      - Books
+  /books/:id:
+    delete:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteBookResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+      summary: Delete book
+      tags:
+      - Books
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetBookResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+      summary: Get book
+      tags:
+      - Books
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateBookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UpdateBookResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_books.ErrorResponse'
+      summary: Update book
+      tags:
+      - Books
   /movies:
     get:
       consumes:
@@ -185,11 +398,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
       summary: List movies
       tags:
       - Movies
@@ -213,11 +426,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
       summary: Create movie
       tags:
       - Movies
@@ -235,11 +448,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
       summary: Delete movie
       tags:
       - Movies
@@ -256,11 +469,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
       summary: Get movie
       tags:
       - Movies
@@ -284,11 +497,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_movies.ErrorResponse'
       summary: Update movie
       tags:
       - Movies
@@ -302,15 +515,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.ListShowResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ListShowResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
       summary: List shows
       tags:
       - Shows
@@ -330,15 +543,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.CreateShowResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.CreateShowResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
       summary: Create show
       tags:
       - Shows
@@ -352,15 +565,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.DeleteShowResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.DeleteShowResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
       summary: Delete show
       tags:
       - Shows
@@ -373,15 +586,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.GetShowResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.GetShowResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
       summary: Get show
       tags:
       - Shows
@@ -401,15 +614,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.UpdateShowResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.UpdateShowResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/github_com_viniciusdsouza_goverallratings_handler_shows.ErrorResponse'
       summary: Update show
       tags:
       - Shows
