@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/viniciusdsouza/goverallratings/schemas"
 )
+
 // @BasePath /api/v1
 // @Summary Create movie
 // @Tags Movies
@@ -18,7 +19,7 @@ import (
 // @Router /movies [post]
 func CreateMovieHandler(ctx *gin.Context) {
 	cmd := CreateMovieRequest{}
-	
+
 	ctx.BindJSON(&cmd)
 
 	err := cmd.Validate()
@@ -29,14 +30,14 @@ func CreateMovieHandler(ctx *gin.Context) {
 	}
 
 	movie := schemas.Movie{
-		Title: cmd.Title,
+		Title:    cmd.Title,
 		Duration: cmd.Duration,
-		Rating: cmd.Rating,
-		Genre: cmd.Genre,
+		Rating:   cmd.Rating,
+		Genre:    cmd.Genre,
 	}
 
 	err = db.Create(&movie).Error
-	if err != nil{
+	if err != nil {
 		logger.Errorf("error creating movie: %v", err.Error())
 		sendError(ctx, http.StatusInternalServerError, "error creating movie")
 		return
