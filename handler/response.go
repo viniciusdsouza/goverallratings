@@ -53,3 +53,28 @@ type ListMovieResponse struct {
 	Message string                  `json:"message"`
 	Data    []schemas.MovieResponse `json:"data"`
 }
+
+type CreateShowResponse struct {
+	Message string               `json:"message"`
+	Data    schemas.ShowResponse `json:"data"`
+}
+
+type GetShowResponse struct {
+	Message string               `json:"message"`
+	Data    schemas.ShowResponse `json:"data"`
+}
+
+type UpdateShowResponse struct {
+	Message string               `json:"message"`
+	Data    schemas.ShowResponse `json:"data"`
+}
+
+type DeleteShowResponse struct {
+	Message string               `json:"message"`
+	Data    schemas.ShowResponse `json:"data"`
+}
+
+type ListShowResponse struct {
+	Message string                 `json:"message"`
+	Data    []schemas.ShowResponse `json:"data"`
+}
