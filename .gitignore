@@ -11,3 +11,4 @@ launch.json
 Db folder
 
 db/
+*.db
