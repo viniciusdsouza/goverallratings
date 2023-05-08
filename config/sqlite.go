@@ -50,6 +50,12 @@ func InitializeSQLite() (*gorm.DB, error) {
 		return nil, err
 	}
 
+	err = db.AutoMigrate(&schemas.Book{})
+	if err != nil {
+		logger.Errorf("sqlite automigrate error: %v", err)
+		return nil, err
+	}
+
 	// Return the Datebase
 	return db, nil
 }
