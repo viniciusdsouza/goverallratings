@@ -13,8 +13,35 @@ type CreateMovieRequest struct {
 	Rating   int64  `json:"rating"`
 	Genre    string `json:"genre"`
 }
+type UpdateMovieRequest struct {
+	Title    string `json:"title"`
+	Duration int64  `json:"duration"`
+	Rating   int64  `json:"rating"`
+	Genre    string `json:"genre"`
+}
 
 func (r *CreateMovieRequest) Validate() error {
+	if r.Title == "" && r.Duration <= 0 && r.Rating <= 0 && r.Genre == ""{
+		return fmt.Errorf("request body is empty or malformated")
+	}
+	if r.Title == "" {
+		return errParamIsRequired("title", "string")
+	}
+	if r.Duration <= 0 {
+		return errParamIsRequired("duration", "integer")
+	}
+	if r.Rating <= 0 {
+		return errParamIsRequired("rating", "integer")
+	}
+	if r.Genre == "" {
+		return errParamIsRequired("genre", "string")
+	}
+
+	return nil
+}
+
+
+func (r *UpdateMovieRequest) Validate() error {
 	if r.Title == "" && r.Duration <= 0 && r.Rating <= 0 && r.Genre == ""{
 		return fmt.Errorf("request body is empty or malformated")
 	}
