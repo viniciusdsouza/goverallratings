@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  webserver:
+    image: goverallratings
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    volumes:
+    - ./db/main.db:/docker-entrypoint-initdb.d/main.db
+    # command: ./app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

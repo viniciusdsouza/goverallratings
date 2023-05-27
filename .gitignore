@@ -12,3 +12,5 @@ Db folder
 
 db/
 *.db
+
+.build
